@@ -1,9 +1,10 @@
 <template>
-  <div style="width:200px;background-color:#ffffff;">
+  <div class="menu-con">
     <ul>
-      <li v-for="item in list" class="li-level-first " :class="item.children.length?'li-border ':''">
-        <span><i></i>{{item.name}}</span>
-        <sub-menu v-if="item.children.length" :model="item.children"></sub-menu>
+      <li v-for="item in list" class="li-level-first " :class="isFolder(item) && item.open?'li-border ':''">
+        <span v-if="isFolder(item)" @click="toggle(item)"><i></i>{{item.name}}</span>
+        <span v-else><i></i>{{item.name}}</span>
+        <sub-menu v-show="item.open" :model="item.children"></sub-menu>
       </li>      
     </ul>   
       
@@ -17,18 +18,29 @@ export default {
   props: ['list'],
   data () {
     return {
-      open: false,
-      isFolder: false
     }
   },
   components: {
     subMenu
+  },
+  methods: {
+    toggle: function (it) {
+      it.open = !it.open
+    },
+    isFolder: function (it) {
+      return it.children && it.children.length
+    }
   }
+
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+ .menu-con{
+  width:200px;
+  background-color:#ffffff;
+ }
  ul{
   padding:0px;
   user-select:none;
@@ -38,9 +50,9 @@ export default {
     list-style:none;
     
  }
- li.li-border:hover{
-    border-left:4px solid #4775b3;
-    margin-left:-4px;
+ li.li-border{
+    padding-left:20px;
+    border-left:4px solid #4775b3;    
  }
 
  li{
@@ -62,7 +74,7 @@ export default {
     vertical-align:middle;
     display:inline-block;    
     border:none;
-    background-color:gray;
+    background-color:#e2cbce;
     margin-right:16px;
  }
 </style>

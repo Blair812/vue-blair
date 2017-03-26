@@ -1,8 +1,9 @@
 <template>
 <ul>
-    <li v-for="m in model">  		    
-     <span><i></i>{{m.name}}</span>
-		 <sub-menu v-if="m.children.length > 0" :model="m.children"></sub-menu>
+    <li v-for="m in model">  
+        <span v-if="isFolder(m)" @click="toggle(m)"><i></i>{{m.name}}fff</span>
+        <span v-else><i></i>{{m.name}}</span> 
+		<sub-menu  v-show="m.open" :model="m.children"></sub-menu>
     </li>
 </ul>
 
@@ -14,6 +15,14 @@ export default {
   props: ['model'],
   data () {
     return {
+    }
+  },
+  methods: {
+    toggle: function (it) {
+      it.open = !it.open
+    },
+    isFolder: function (it) {
+      return it.children && it.children.length
     }
   }
 }
@@ -36,7 +45,7 @@ export default {
     vertical-align:middle;
     display:inline-block;    
     border:none;
-    background-color:gray;
+    background-color:#e2cbce;
     margin-right:16px;
  }
  li{
