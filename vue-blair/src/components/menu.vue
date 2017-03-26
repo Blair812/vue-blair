@@ -1,5 +1,5 @@
 <template>
-  <div style="width:200px;background-color:yellow;">
+  <div style="width:200px;background-color:#ffffff;">
     <ul>
       <li v-for="item in list" class="li-level-first " :class="item.children.length?'li-border ':''">
         <span><i></i>{{item.name}}</span>
@@ -14,26 +14,11 @@
 import subMenu from './sub-menu'
 export default {
   name: 'menu',
+  props: ['list'],
   data () {
     return {
-      list: [{
-        name: '一级菜单1',
-        children: []
-      },
-      {
-        name: '一级菜单2',
-        children: [{
-          name: '二级菜单1',
-          children: [{
-            name: '三级菜单1',
-            children: []
-          }]
-        },
-        {
-          name: '二级菜单2',
-          children: []
-        }]
-      }]
+      open: false,
+      isFolder: false
     }
   },
   components: {
@@ -54,7 +39,8 @@ export default {
     
  }
  li.li-border:hover{
-    border-left:1px solid blue;
+    border-left:4px solid #4775b3;
+    margin-left:-4px;
  }
 
  li{
@@ -65,7 +51,7 @@ export default {
 
  }
  li:hover{
-  background-color:#666;
+  background-color:#edf3f9;
  }
  li.li-level-first{
   padding-left:24px;
