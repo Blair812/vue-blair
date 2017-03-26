@@ -1,8 +1,8 @@
 <template>
 <ul>
     <li v-for="m in model">  
-        <span v-if="isFolder(m)" @click="toggle(m)"><i></i>{{m.name}}fff</span>
-        <span v-else><i></i>{{m.name}}</span> 
+        <div v-if="isFolder(m)" @click="toggle(m)" class="folder"><span><i></i>{{m.name}}</span><i class="after-span"></i></div>
+        <span v-else><i></i>{{m.name}}</span>
 		<sub-menu  v-show="m.open" :model="m.children"></sub-menu>
     </li>
 </ul>
@@ -50,5 +50,14 @@ export default {
  }
  li{
  	margin-left:14px;
+ }
+ .folder{
+     position:relative;
+     padding:0px;
+ }
+ .after-span{
+     position:absolute;
+     right:0px;
+     top:10px;
  }
 </style>

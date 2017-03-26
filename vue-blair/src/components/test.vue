@@ -1,5 +1,5 @@
 <template>
-  <div style="width:600px;height:600px;background-color:red;">
+  <div style="width:200px;height:600px;background-color:red;">
     
     <tree-menu :list="list"></tree-menu>
       

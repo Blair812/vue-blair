@@ -2,7 +2,7 @@
   <div class="menu-con">
     <ul>
       <li v-for="item in list" class="li-level-first " :class="isFolder(item) && item.open?'li-border ':''">
-        <span v-if="isFolder(item)" @click="toggle(item)"><i></i>{{item.name}}</span>
+        <div v-if="isFolder(item)" @click="toggle(item)" class="folder"><span><i></i>{{item.name}}</span><i class="after-span"></i></div>
         <span v-else><i></i>{{item.name}}</span>
         <sub-menu v-show="item.open" :model="item.children"></sub-menu>
       </li>      
@@ -38,7 +38,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
  .menu-con{
-  width:200px;
   background-color:#ffffff;
  }
  ul{
@@ -62,6 +61,11 @@ export default {
   line-height:40px;
 
  }
+  span{
+    line-height:40px;
+    display:inline-block;
+  }
+
  li:hover{
   background-color:#edf3f9;
  }
@@ -76,5 +80,14 @@ export default {
     border:none;
     background-color:#e2cbce;
     margin-right:16px;
+ }
+ .folder{
+     position:relative;
+     padding:0px;
+ }
+ .after-span{
+     position:absolute;
+     right:0px;
+     top:10px;
  }
 </style>
